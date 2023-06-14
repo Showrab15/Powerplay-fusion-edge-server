@@ -180,6 +180,12 @@ async function run() {
         })
 
 
+         // instructor related api
+         app.get('/instructors', async (req, res) => {
+            const query = { role: "instructor" };
+            const result = await usersCollection.find(query).toArray();
+            res.send(result);
+        })
 
 
 
@@ -199,7 +205,7 @@ async function run() {
             res.send(result)
         })
 
-     
+
 
 
         app.patch('/addClasses/:id', verifyJWT, verifyInstructor, async (req, res) => {
@@ -218,7 +224,7 @@ async function run() {
         })
 
 
-        app.put('/addClasses/:id',    async (req, res) => {
+        app.put('/addClasses/:id', async (req, res) => {
             const id = req.params.id;
             const feedback = req.body.feedback; // Assuming the new seat value is provided in the request body
 
@@ -234,7 +240,7 @@ async function run() {
 
 
 
-       
+
 
 
 
@@ -329,7 +335,7 @@ async function run() {
             const selectedQuery = { _id: new ObjectId(payment.selectedClassId) }
             const enrolledQuery = { _id: new ObjectId(payment.enrolledClassId) }
             const enrolledClass = await addClassesCollection.findOne(enrolledQuery);
-console.log(enrolledClass)
+            console.log(enrolledClass)
             // insert enrolled class to enrolled collection 
             const newEnrolledClass = {
                 classId: payment.enrolledClassId,
@@ -365,7 +371,7 @@ console.log(enrolledClass)
             }
 
             const decodedEmail = req.decoded.email;
-            console.log( req.decoded)
+            console.log(req.decoded)
             if (email !== decodedEmail) {
                 return res.status(403).send({ error: true, message: 'forbidden access' })
             }
@@ -397,6 +403,13 @@ console.log(enrolledClass)
         });
 
 
+            app.get('/popularClass/:status', async (req, res) => {
+              console.log(req.params.status);
+              // const query = { _id: }
+              const limitClass = 6;
+              const result = await addClassesCollection.find({ status: req.params.status }).sort({ student: -1 }).limit(limitClass).toArray();
+              res.send(result);
+            })
 
 
 
