@@ -326,7 +326,7 @@ async function run() {
 
 
 
-
+// payment intent post method 
         app.post('/payments', verifyJWT, async (req, res) => {
             const payment = req.body;
             console.log(payment)
