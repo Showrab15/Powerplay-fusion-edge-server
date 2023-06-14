@@ -223,7 +223,7 @@ async function run() {
 
         })
 
-
+        //give feedback related update method
         app.put('/addClasses/:id', async (req, res) => {
             const id = req.params.id;
             const feedback = req.body.feedback; // Assuming the new seat value is provided in the request body
@@ -238,12 +238,7 @@ async function run() {
         })
 
 
-
-
-
-
-
-
+        //post method for student select their class
         app.post('/selectedClass', async (req, res) => {
             const selectedClass = req.body;
             // console.log(selectedClass)
@@ -252,14 +247,14 @@ async function run() {
         })
 
 
-        app.get('/selectedClass', async (req, res) => {
+        //get method for student select their class
+        app.get('/selectedClass', verifyJWT, async (req, res) => {
             const email = req.query.email;
             if (!email) {
                 res.send([]);
             }
 
             const decodedEmail = req.decoded.email;
-            // console.log(decodedEmail)
             if (email !== decodedEmail) {
                 return res.status(403).send({ error: true, message: 'forbidden access' })
             }
@@ -268,7 +263,8 @@ async function run() {
             res.send(result)
         })
 
-        //delted methor student cancel their class
+
+        //delted method student cancel their class
         app.delete('/selectedClass/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: new ObjectId(id) };
