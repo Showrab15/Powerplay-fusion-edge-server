@@ -180,8 +180,8 @@ async function run() {
         })
 
 
-         // instructor related api
-         app.get('/instructors', async (req, res) => {
+        // instructor related api
+        app.get('/instructors', async (req, res) => {
             const query = { role: "instructor" };
             const result = await usersCollection.find(query).toArray();
             res.send(result);
@@ -189,7 +189,7 @@ async function run() {
 
 
 
-        app.post('/addClasses',  async (req, res) => {
+        app.post('/addClasses', async (req, res) => {
             const newClass = req.body;
             // console.log(newClass)
             const result = await addClassesCollection.insertOne(newClass);
@@ -252,7 +252,7 @@ async function run() {
         })
 
 
-        app.get('/selectedClass',  async (req, res) => {
+        app.get('/selectedClass', async (req, res) => {
             const email = req.query.email;
             if (!email) {
                 res.send([]);
@@ -383,7 +383,7 @@ async function run() {
 
 
 
-
+        // payment history api
         app.get('/studentsPaymentsHistory', verifyJWT, async (req, res) => {
             const email = req.query.email;
 
@@ -403,7 +403,7 @@ async function run() {
         });
 
 
-            
+
 
 
 
