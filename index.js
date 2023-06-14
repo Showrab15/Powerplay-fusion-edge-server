@@ -362,7 +362,7 @@ async function run() {
 
 
 
-
+        // enrolled class related api
         app.get('/enrolledClass', verifyJWT, async (req, res) => {
             const email = req.query.email;
 
