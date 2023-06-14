@@ -276,6 +276,7 @@ async function run() {
         })
 
 
+        //single selected class for student
         app.get("/selectedClass/:id", async (req, res) => {
             const id = req.params.id;
             const query = { _id: new ObjectId(id) };
