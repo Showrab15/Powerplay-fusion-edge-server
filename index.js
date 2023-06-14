@@ -118,7 +118,6 @@ async function run() {
 
         app.patch('/users/admin/:id', async (req, res) => {
             const id = req.params.id;
-            // console.log(id)
             const filter = { _id: new ObjectId(id) }
             const updateDoc = {
                 $set: {
@@ -133,7 +132,6 @@ async function run() {
 
         app.patch('/users/instructor/:id', async (req, res) => {
             const id = req.params.id;
-            // console.log(id)
             const filter = { _id: new ObjectId(id) }
             const updateDoc = {
                 $set: {
@@ -144,12 +142,6 @@ async function run() {
             res.send(result)
 
         })
-
-
-
-
-
-
 
 
 
@@ -191,23 +183,21 @@ async function run() {
 
         app.post('/addClasses', async (req, res) => {
             const newClass = req.body;
-            // console.log(newClass)
             const result = await addClassesCollection.insertOne(newClass);
             res.send(result);
         })
 
 
 
-
+        //get method for all classes
         app.get('/addClasses', async (req, res) => {
             const result = await addClassesCollection.find().toArray();
-            // console.log(result)
             res.send(result)
         })
 
 
 
-
+        //patch method for admin can make and change user role
         app.patch('/addClasses/:id', async (req, res) => {
             const id = req.params.id;
             const status = req.query.status;
