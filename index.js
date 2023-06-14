@@ -268,6 +268,7 @@ async function run() {
             res.send(result)
         })
 
+        //delted methor student cancel their class
         app.delete('/selectedClass/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: new ObjectId(id) };
