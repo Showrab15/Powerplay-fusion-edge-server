@@ -285,9 +285,9 @@ async function run() {
 
 
 
+        // classes of instructor
         app.get('/instructorClass', verifyJWT, async (req, res) => {
             const email = req.query.email;
-            // console.log(req.query);
             if (!email) {
                 res.send([]);
             }
@@ -326,7 +326,7 @@ async function run() {
 
 
 
-// payment intent post method 
+        // payment  post method 
         app.post('/payments', verifyJWT, async (req, res) => {
             const payment = req.body;
             console.log(payment)
