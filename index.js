@@ -96,7 +96,7 @@ async function run() {
 
 
 
-        app.get('/users', verifyJWT, verifyAdmin, async (req, res) => {
+        app.get('/users', async (req, res) => {
             const result = await usersCollection.find().toArray();
             // console.log(result)
             res.send(result)
@@ -189,7 +189,7 @@ async function run() {
 
 
 
-        app.post('/addClasses', verifyJWT, verifyInstructor, async (req, res) => {
+        app.post('/addClasses',  async (req, res) => {
             const newClass = req.body;
             // console.log(newClass)
             const result = await addClassesCollection.insertOne(newClass);
@@ -208,7 +208,7 @@ async function run() {
 
 
 
-        app.patch('/addClasses/:id', verifyJWT, verifyInstructor, async (req, res) => {
+        app.patch('/addClasses/:id', async (req, res) => {
             const id = req.params.id;
             const status = req.query.status;
             // console.log(id)
@@ -252,7 +252,7 @@ async function run() {
         })
 
 
-        app.get('/selectedClass', verifyJWT, async (req, res) => {
+        app.get('/selectedClass',  async (req, res) => {
             const email = req.query.email;
             if (!email) {
                 res.send([]);
@@ -285,7 +285,7 @@ async function run() {
 
 
 
-        app.get('/instructorClass', verifyJWT, verifyInstructor, async (req, res) => {
+        app.get('/instructorClass', verifyJWT, async (req, res) => {
             const email = req.query.email;
             // console.log(req.query);
             if (!email) {
@@ -403,14 +403,7 @@ async function run() {
         });
 
 
-            app.get('/popularClass/:status', async (req, res) => {
-              console.log(req.params.status);
-              // const query = { _id: }
-              const limitClass = 6;
-              const result = await addClassesCollection.find({ status: req.params.status }).sort({ student: -1 }).limit(limitClass).toArray();
-              res.send(result);
-            })
-
+            
 
 
 
